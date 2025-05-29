@@ -1,5 +1,6 @@
 package competencia;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,8 +49,12 @@ public class Piloto {
 		this.tiempoVuelta = tiempoVuelta;
 	}
 
-	public CalularPromedio (double timepoVuelta) {
-	 return 0.0;
+	public double CalularPromedio (double timepoVuelta) {
+		double clasificados;
+		for (int i = 0; i < tiempoVuelta; i++) {
+			
+		}
+	 return 0;
 }
 	
 	@Override

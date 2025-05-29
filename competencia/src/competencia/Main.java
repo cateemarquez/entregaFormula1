@@ -41,6 +41,17 @@ public class Main {
 		}
 		JOptionPane.showMessageDialog(null, corredores);
 
+		String ganadores = "";
+		List<Piloto> rapidos = Piloto.pilotos.stream()
+			    .filter(pilotos -> pilotos.getTiempoVuelta() < 15)
+			    .collect(Collectors.toList());
+		
+		for (Piloto pilotos : rapidos) {
+			ganadores = ganadores + pilotos + "\n";
+			
+		}
+	   JOptionPane.showMessageDialog(null,"Autos rápidos: " + ganadores);
+
 	}
 
 }
