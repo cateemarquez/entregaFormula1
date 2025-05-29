@@ -1,7 +1,11 @@
 package competencia;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Piloto {
 
+	 static LinkedList<Piloto> pilotos = new LinkedList<Piloto>();
 	protected String nombre;
 	protected String escuderia;
 	protected double tiempoVuelta;
@@ -44,7 +48,10 @@ public class Piloto {
 		this.tiempoVuelta = tiempoVuelta;
 	}
 
-
+	public CalularPromedio (double timepoVuelta) {
+	 return 0.0;
+}
+	
 	@Override
 	public String toString() {
 		return "Piloto [nombre=" + nombre + ", escuderia=" + escuderia + ", tiempoVuelta=" + tiempoVuelta + "]";
