@@ -110,7 +110,7 @@ public class Piloto {
 			.min(Comparator.comparingDouble(Piloto::getTiempoVuelta))
 			.orElse(null);
 		
-		return "El piloto mas rápido fue: " + ganador;
+		return "El piloto más rápido fue: " + ganador;
 	}
 	
 	public static String Perdedor() {
@@ -118,7 +118,7 @@ public class Piloto {
 			.max(Comparator.comparingDouble(Piloto::getTiempoVuelta))
 			.orElse(null);
 		
-		return "El piloto mas lento fue: " + perdedor;
+		return "El piloto más lento fue: " + perdedor;
 	}
 	
 		
