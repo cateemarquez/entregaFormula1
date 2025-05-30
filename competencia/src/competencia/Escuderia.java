@@ -63,11 +63,7 @@ public class Escuderia {
 		escuderias.add(new Escuderia("Kick Sauber"));
 	}
 	
-//	public static String MostrarEscuderias() {
-////		for (Escuderia e : escuderias) {
-////            
-////        }
-//	}
+
 	
 	
 }

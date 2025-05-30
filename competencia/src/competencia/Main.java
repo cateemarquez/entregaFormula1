@@ -1,9 +1,5 @@
 package competencia;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -26,10 +22,11 @@ public class Main {
 			case 0: //mostrar escuderias
 				
 				Escuderia.CargarEscuderias();
-//				JOptionPane.showMessageDialog(null, Escuderia.MostrarEscuderias() , "Escuderias de la fecha", JOptionPane.DEFAULT_OPTION,
-//						new ImageIcon(Main.class.getResource("/img/f1.png")));
-				
-				break;
+				for (int i = 0; i < Escuderia.getEscuderias().size(); i++) {
+					JOptionPane.showMessageDialog(null, Escuderia.getEscuderias().get(i) , "Escuderias de la fecha", JOptionPane.DEFAULT_OPTION,
+							new ImageIcon(Main.class.getResource("/img/"+ i +".png")));
+				}
+				break;				
 
 			case 1: //vuelta rapida
 				
