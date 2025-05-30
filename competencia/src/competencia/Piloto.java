@@ -13,20 +13,23 @@ public class Piloto {
 
 	//clase
 	static LinkedList<Piloto> pilotos = new LinkedList<Piloto>();
+	static LinkedList<Piloto> clasificados = new LinkedList<Piloto>();
+
 	
 	//atributos
 	protected String nombre;
 	protected Escuderia escuderia;
 	protected Auto auto;
 	protected double tiempoVuelta;
+	protected int puntos;
 	
 	//constructor
 	public Piloto(String nombre, Auto auto, Escuderia escuderia) {
-		super();
 		this.nombre = nombre;
 		this.auto = auto;
 		this.escuderia = escuderia;
 		this.tiempoVuelta = Math.random()*15+10;
+		this.puntos = 0;
 	}
 
 	//getters y setters
@@ -62,9 +65,25 @@ public class Piloto {
 		this.tiempoVuelta = tiempoVuelta;
 	}
 	
+	public static LinkedList<Piloto> getPilotos() {
+		return pilotos;
+	}
+
+	public static void setPilotos(LinkedList<Piloto> pilotos) {
+		Piloto.pilotos = pilotos;
+	}
+
+	public int getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
+	}
+
 	@Override
 	public String toString() {
-		return "PILOTO: " + nombre + " | " + escuderia + " | " + auto + " | TIEMPO: " + tiempoVuelta;
+		return "PILOTO: " + nombre + " | " + escuderia + " | " + auto + " | TIEMPO: " + tiempoVuelta + "\n";
 	}
 	
 	//metodos
@@ -102,6 +121,23 @@ public class Piloto {
 		pilotos.add(new Piloto("Daniel Ricciardo", a2,Escuderia.escuderias.get(6)));
 		pilotos.add(new Piloto("Valtteri Bottas",a9, Escuderia.escuderias.get(7)));
 		pilotos.add(new Piloto("Zhou Guanyu",a7 ,Escuderia.escuderias.get(7)));	
+		Escuderia.escuderias.get(0).pilotosPropios.add(pilotos.get(0));
+		Escuderia.escuderias.get(0).pilotosPropios.add(pilotos.get(1));
+		Escuderia.escuderias.get(1).pilotosPropios.add(pilotos.get(2));
+		Escuderia.escuderias.get(1).pilotosPropios.add(pilotos.get(3));
+		Escuderia.escuderias.get(2).pilotosPropios.add(pilotos.get(4));
+		Escuderia.escuderias.get(2).pilotosPropios.add(pilotos.get(5));
+		Escuderia.escuderias.get(3).pilotosPropios.add(pilotos.get(6));
+		Escuderia.escuderias.get(3).pilotosPropios.add(pilotos.get(7));
+		Escuderia.escuderias.get(4).pilotosPropios.add(pilotos.get(8));
+		Escuderia.escuderias.get(4).pilotosPropios.add(pilotos.get(9));
+		Escuderia.escuderias.get(5).pilotosPropios.add(pilotos.get(10));
+		Escuderia.escuderias.get(5).pilotosPropios.add(pilotos.get(11));
+		Escuderia.escuderias.get(6).pilotosPropios.add(pilotos.get(12));
+		Escuderia.escuderias.get(6).pilotosPropios.add(pilotos.get(13));
+		Escuderia.escuderias.get(7).pilotosPropios.add(pilotos.get(14));
+		Escuderia.escuderias.get(7).pilotosPropios.add(pilotos.get(15));
+
 	}
 	
 	public static String ordenDeTiemposRapida() {
@@ -118,7 +154,7 @@ public class Piloto {
 		return corredores;
 	}
 
-	public static String autosClasificadosRapida() {
+	public static LinkedList<Piloto> autosClasificadosRapida() {
 		//variables
 		String ganadores = "";
 		int check=0;
@@ -127,14 +163,17 @@ public class Piloto {
 			    .sorted(Comparator.comparingDouble(Piloto::getTiempoVuelta))
 			    .collect(Collectors.toList());
 		
-			for (Piloto pilotos : ordenados) {
+			for (Piloto piloto : ordenados) {
 				if (check<8) {
-					ganadores = ganadores + pilotos + "\n";
+					ganadores = ganadores + piloto + "\n";
 					check++;
+				clasificados.add(piloto);
 				}
+			}
 			
-			}//fin for
-		return ganadores;
+			JOptionPane.showMessageDialog(null, ganadores, "Clasificados", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+			
+		return clasificados;
 	}
 	
 	public static String ganadorRapida() {
@@ -153,20 +192,96 @@ public class Piloto {
 		return "El piloto más lento fue: " + perdedor;
 	}
 	
+	public static String topTresRapida() {
+		//variables
+		String top = "";
+		int check=0;
+		
+		List <Piloto> ordenados = pilotos.stream()
+			    .sorted(Comparator.comparingDouble(Piloto::getTiempoVuelta))
+			    .collect(Collectors.toList());
+		
+		for (Piloto piloto : ordenados) {
+			if (check<3) {
+				top = top + piloto + "\n";
+				check++;
+			}
+		}
+		return "El top 3 de los corredores mas rapidos es:\n" + top;
+	}
+	
 	public static void correrVueltaRapida() {
 		JOptionPane.showMessageDialog(null, "Arrancan los corredores, se preparan en la \npista para ver quien clasificará!", "Vuelta rápida!", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
 		
-		JOptionPane.showMessageDialog(null, "Los tiempos de los 16 pilotos fueron.." + "\n" + Piloto.ordenDeTiemposRapida(), "Vueltas de los pilotos", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+		JOptionPane.showMessageDialog(null, "Los tiempos de los 16 pilotos fueron.." + "\n" + ordenDeTiemposRapida(), "Vueltas de los pilotos", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
 		
 		JOptionPane.showMessageDialog(null, "Los 8 que pasan a siguiente fase..", "Vuelta rápida!", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
 		
-		JOptionPane.showMessageDialog(null, Piloto.autosClasificadosRapida(), "Clasificados", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+		autosClasificadosRapida();
 		
-		JOptionPane.showMessageDialog(null, Piloto.perdedorRapida(), "Perdedor", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+		JOptionPane.showMessageDialog(null, perdedorRapida(), "Perdedor", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
 		
-		JOptionPane.showMessageDialog(null, Piloto.ganadorRapida(), "Ganador", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+		JOptionPane.showMessageDialog(null, ganadorRapida(), "Ganador", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+		
+		JOptionPane.showMessageDialog(null, topTresRapida(), "Top 3", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
 	}
 	
-	
+	public static void mostrarPilotos() {
+		String eleccion;
+		//variables
+		String [] menu = {"Red Bull Racing", "Ferrari", "Mercedes", "McLaren", "Aston Martin", "Alpine", "RB (Visa Cash App RB)", "Kick Sauber"};
 
+		eleccion = (String)JOptionPane.showInputDialog(null, "Seleccione la escuderia de la cual desea ver los pilotos:", "Seleccion", 0, new ImageIcon(Main.class.getResource("/img/f1.png")), menu, menu[0]);
+		
+		for (int i = 0; i < Escuderia.escuderias.size(); i++) {
+			if (Escuderia.escuderias.get(i).getNombre().equals(eleccion)) {
+				JOptionPane.showMessageDialog(null, "Los pilotos de la escuderia " + eleccion + " son: \n" + Escuderia.escuderias.get(i).pilotosPropios, "Pilotos por escuderia.", JOptionPane.DEFAULT_OPTION,new ImageIcon(Main.class.getResource("/img/f1.png")));			
+				}
+		}
+
+	}
+
+	public static void correrCarrera() {
+		int check=0;
+		String puntaje = "";
+		
+		autosClasificadosRapida();
+		
+		//inicio
+		JOptionPane.showMessageDialog(null, "Preparense, la carrera esta por comenzar!", "Que empiece la carrera!", JOptionPane.DEFAULT_OPTION,new ImageIcon(Main.class.getResource("/img/f1.png")));
+		do {
+			JOptionPane.showMessageDialog(null, "Arrancaron! Ronda " + (check+1), "Comenzo la carrera!", JOptionPane.DEFAULT_OPTION,new ImageIcon(Main.class.getResource("/img/f1.png")));
+			//vueltas
+			for (int i = 0; i < clasificados.size(); i++) {
+			clasificados.get(i).setPuntos(clasificados.get(i).getPuntos() + (int)(Math.random()*10+3));
+			puntaje = puntaje + "PILOTO: " + clasificados.get(i).getNombre() + " | " + clasificados.get(i).getEscuderia() + " | PUNTOS: "  + clasificados.get(i).getPuntos() + "\n";
+			}
+			//puntos por vuelta
+			JOptionPane.showMessageDialog(null, "Los puntos de esta ronda son: \n" + puntaje, "Puntaje", JOptionPane.DEFAULT_OPTION,new ImageIcon(Main.class.getResource("/img/f1.png")));
+			puntaje = "";
+			check++;
+		} while (check<3);
+		
+		//resultados
+		JOptionPane.showMessageDialog(null, "La carrera ha finalizado!", "Resultados de la carrera!", JOptionPane.DEFAULT_OPTION,new ImageIcon(Main.class.getResource("/img/f1.png")));
+		
+		//ranking
+		String corredores="";
+		
+		List <Piloto> ordenados = clasificados.stream()
+			    .sorted(Comparator.comparingInt(Piloto::getPuntos).reversed())
+			    .collect(Collectors.toList());
+		
+			for (Piloto pilotos : ordenados) {
+			corredores = corredores + pilotos + " PUNTOS: " + pilotos.getPuntos() +"\n";
+			}
+			JOptionPane.showMessageDialog(null, "Estos fueron los resultados! \n " + corredores, "Resultados de la carrera!", JOptionPane.DEFAULT_OPTION,new ImageIcon(Main.class.getResource("/img/f1.png")));
+		
+		//ganador
+		Piloto ganador = clasificados.stream()
+				.max(Comparator.comparingInt(Piloto::getPuntos))
+				.orElse(null);
+		JOptionPane.showMessageDialog(null, "El ganador de la carrera es: " + ganador + " \n con " + ganador.getPuntos() + " puntos.", "Resultados de la carrera!", JOptionPane.DEFAULT_OPTION,new ImageIcon(Main.class.getResource("/img/f1.png")));
+	}
+	
 }

@@ -2,6 +2,9 @@ package competencia;
 
 import java.util.LinkedList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 public class Escuderia {
 
 	//clase
@@ -9,13 +12,11 @@ public class Escuderia {
 	
 	//atributos
 	protected String nombre;
-	protected LinkedList<Integer> puntos = new LinkedList<Integer>();
-	protected LinkedList<Piloto> pilotos = new LinkedList<Piloto>();
+	protected LinkedList<Piloto> pilotosPropios = new LinkedList<Piloto>();
 	
 	//constructor
 	public Escuderia(String nombre) {
 		this.nombre = nombre;
-		this.puntos = null;
 	}
 
 	//getters y setters
@@ -35,25 +36,26 @@ public class Escuderia {
 		this.nombre = nombre;
 	}
 
-	public LinkedList<Integer> getPuntos() {
-		return puntos;
-	}
-
-	public void setPuntos(LinkedList<Integer> puntos) {
-		this.puntos = puntos;
-	}
-
 	public LinkedList<Piloto> getPilotos() {
-		return pilotos;
+		return pilotosPropios;
 	}
 
 	public void setPilotos(LinkedList<Piloto> pilotos) {
-		this.pilotos = pilotos;
+		this.pilotosPropios = pilotos;
 	}
 
 	@Override
 	public String toString() {
 		return "ESCUDERIA: " + nombre;
+	}
+	
+	//metodos
+	public static void mostrarEscuderias() {
+		for (int i = 0; i < getEscuderias().size(); i++) {
+			JOptionPane.showMessageDialog(null, getEscuderias().get(i) , "Escuderias de la fecha", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/"+ i +".png")));
+		}
+		
+	
 	}
 
 }
