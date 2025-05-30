@@ -1,54 +1,27 @@
 package competencia;
 
 public class Auto {
-
-
-	protected String nombre;
-	protected String escuderia;
-	protected double tiempoVuelta;
 	
+	//atributos
+	protected String modelo;
 	
-	public Auto(String nombre, String escuderia) {
-		this.nombre = nombre;
-		this.escuderia = escuderia;
-		this.tiempoVuelta = Math.random()*10+10;
+	//constructor
+	public Auto(String modelo) {
+		this.modelo = modelo;
 	}
 
-
-	public String getNombre() {
-		return nombre;
+	//getters y setters
+	public String getModelo() {
+		return modelo;
 	}
 
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
-
-
-	public String getEscuderia() {
-		return escuderia;
-	}
-
-
-	public void setEscuderia(String escuderia) {
-		this.escuderia = escuderia;
-	}
-
-
-	public double getTiempoVuelta() {
-		return tiempoVuelta;
-	}
-
-
-	public void setTiempoVuelta(double tiempoVuelta) {
-		this.tiempoVuelta = tiempoVuelta;
-	}
-
 
 	@Override
 	public String toString() {
-		return "Piloto [nombre=" + nombre + ", escuderia=" + escuderia + ", tiempoVuelta=" + tiempoVuelta + "]";
+		return "AUTO: modelo = " + modelo;
 	}
-	
 	
 }
