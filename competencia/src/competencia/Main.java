@@ -11,46 +11,61 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		String [] menu = {"Ver escuderias", "Vuelta rápida", "Carrera", "Salir"};
+		int eleccion = 0;
+		
+		
 		JOptionPane.showMessageDialog(null, "Bienvenido a la F1!", "Que empiece la carrera!", JOptionPane.DEFAULT_OPTION,new ImageIcon(Main.class.getResource("/img/f1.png")));
 		
-		Piloto.pilotos.add(new Piloto( "Max Verstappen", "Red Bull Racing"));
-		Piloto.pilotos.add(new Piloto("Sergio Pérez", "Red Bull Racing"));
-		Piloto.pilotos.add(new Piloto("Charles Leclerc", "Ferrari"));
-		Piloto.pilotos.add(new Piloto("Carlos Sainz", "Ferrari"));
-		Piloto.pilotos.add(new Piloto("Lewis Hamilton", "Mercedes"));
-		Piloto.pilotos.add(new Piloto("George Russell", "Mercedes"));
-		Piloto.pilotos.add(new Piloto("Lando Norris", "McLaren"));
-		Piloto.pilotos.add(new Piloto("Oscar Piastri", "McLaren"));
-		Piloto.pilotos.add(new Piloto("Fernando Alonso", "Aston Martin"));
-		Piloto.pilotos.add(new Piloto("Lance Stroll", "Aston Martin"));
-		Piloto.pilotos.add(new Piloto("Esteban Ocon", "Alpine"));
-		Piloto.pilotos.add(new Piloto("Pierre Gasly", "Alpine"));
-		Piloto.pilotos.add(new Piloto("Yuki Tsunoda", "RB (Visa Cash App RB)"));
-		Piloto.pilotos.add(new Piloto("Daniel Ricciardo", "RB (Visa Cash App RB)"));
-		Piloto.pilotos.add(new Piloto("Valtteri Bottas", "Kick Sauber"));
-		Piloto.pilotos.add(new Piloto("Zhou Guanyu", "Kick Sauber"));
-		String corredores="";
-		
-		List <Piloto> ordenados = Piloto.pilotos.stream()
-			    .sorted(Comparator.comparingDouble(Piloto::getTiempoVuelta))
-			    .collect(Collectors.toList());
-		
-		for (Piloto pilotos : ordenados) {
-			corredores = corredores + pilotos + "\n";
+		do {
 			
-		}
-		JOptionPane.showMessageDialog(null, corredores);
+			eleccion = JOptionPane.showOptionDialog(null, "Seleccione la opción que desee: ", "INICIO", 0, 0,
+					new ImageIcon(Main.class.getResource("/img/f1.png")), menu, menu[0]);
+			
+			switch (eleccion) {
+			case 0: //mostrar escuderias
+				
+				Escuderia.CargarEscuderias();
+//				JOptionPane.showMessageDialog(null, Escuderia.MostrarEscuderias() , "Escuderias de la fecha", JOptionPane.DEFAULT_OPTION,
+//						new ImageIcon(Main.class.getResource("/img/f1.png")));
+				
+				break;
 
-		String ganadores = "";
-		List<Piloto> rapidos = Piloto.pilotos.stream()
-			    .filter(pilotos -> pilotos.getTiempoVuelta() < 15)
-			    .collect(Collectors.toList());
-		
-		for (Piloto pilotos : rapidos) {
-			ganadores = ganadores + pilotos + "\n";
+			case 1: //vuelta rapida
+				
+				Piloto.CargarPilotos();
+				JOptionPane.showMessageDialog(null, "Arrancan los corredores, se preparan en la \npista para ver quien clasificará!", "Vuelta rápida!", JOptionPane.DEFAULT_OPTION,
+						new ImageIcon(Main.class.getResource("/img/f1.png")));
+				JOptionPane.showMessageDialog(null, "Los tiempos de los 16 pilotos fueron.." + "\n" + Piloto.OrdenDeTiempos(), "Vueltas de los pilotos", JOptionPane.DEFAULT_OPTION,
+						new ImageIcon(Main.class.getResource("/img/f1.png")));
+				
+				JOptionPane.showMessageDialog(null, "Los 8 que pasan a siguiente fase..", "Vuelta rápida!", JOptionPane.DEFAULT_OPTION,
+						new ImageIcon(Main.class.getResource("/img/f1.png")));
+				JOptionPane.showMessageDialog(null,Piloto.AutosClasificados(), "Clasificados", JOptionPane.DEFAULT_OPTION,
+						new ImageIcon(Main.class.getResource("/img/f1.png")));
+				
+				JOptionPane.showMessageDialog(null, Piloto.Perdedor(), "Perdedor", JOptionPane.DEFAULT_OPTION,
+						new ImageIcon(Main.class.getResource("/img/f1.png")));
+				JOptionPane.showMessageDialog(null, Piloto.Ganador(), "Ganador", JOptionPane.DEFAULT_OPTION,
+						new ImageIcon(Main.class.getResource("/img/f1.png")));
+				
+				break;
+				
+			case 2: //carrera
+	
+				break;
+				
+			case 3: //salir
+				
+				JOptionPane.showMessageDialog(null, "Gracias, hasta la próxima carrera!!", "Adiós!", JOptionPane.DEFAULT_OPTION,
+						new ImageIcon(Main.class.getResource("/img/f1.png")));
+				break;
+			}
 			
-		}
-	   JOptionPane.showMessageDialog(null,"Autos rápidos: " + ganadores);
+		} while (eleccion!=3);
+		
+		
+		
 
 	}
 
