@@ -2,4 +2,4 @@
 <p>Materia: Programación orientada a objetos</p>
 <p>Alumnas: Victoria Cossi Mazza y Caterina Marquez</p>
 <h3>Diagrama de clases:</h3>
-<img src="Objetos - Formula 1.png">
+<img src="Objetos - Formula 1.png" width=900 height=1100>
