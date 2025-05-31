@@ -83,7 +83,7 @@ public class Piloto {
 
 	@Override
 	public String toString() {
-		return "PILOTO: " + nombre + " | " + escuderia + " | " + auto + " | TIEMPO: " + tiempoVuelta + "\n";
+		return "PILOTO: " + nombre + " | " + escuderia + " | " + auto + " | TIEMPO: " + tiempoVuelta;
 	}
 	
 	//metodos
@@ -210,21 +210,40 @@ public class Piloto {
 		return "El top 3 de los corredores mas rapidos es:\n" + top;
 	}
 	
-	public static void correrVueltaRapida() {
-		JOptionPane.showMessageDialog(null, "Arrancan los corredores, se preparan en la \npista para ver quien clasificará!", "Vuelta rápida!", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+	public static void correr() {
+		// VUELTA RAPIDA
+		//variables
+		String opcion="";
+		String[] minimenu = {"Ganador", "Perdedor", "Top 3", "Siguiente"};
+		
+		JOptionPane.showMessageDialog(null, "Comenzamos con una vuelta rapida, a ver que corredores clasificaran! Se preparan en la \npista para ver quien pasara a la siguiente fase!", "Vuelta rápida!", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
 		
 		JOptionPane.showMessageDialog(null, "Los tiempos de los 16 pilotos fueron.." + "\n" + ordenDeTiemposRapida(), "Vueltas de los pilotos", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
 		
 		JOptionPane.showMessageDialog(null, "Los 8 que pasan a siguiente fase..", "Vuelta rápida!", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
-		
 		autosClasificadosRapida();
 		
-		JOptionPane.showMessageDialog(null, perdedorRapida(), "Perdedor", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+		do {
+		opcion = (String)JOptionPane.showInputDialog(null, "Elija el resultado que desea ver..", "Resultados", 0, new ImageIcon(Main.class.getResource("/img/f1.png")), minimenu, minimenu[0]);
+		switch (opcion) {
+		case "Ganador":
+			JOptionPane.showMessageDialog(null, ganadorRapida(), "Ganador", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+			break;
+		case "Perdedor":
+			JOptionPane.showMessageDialog(null, perdedorRapida(), "Perdedor", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+			break;
+		case "Top 3":
+			JOptionPane.showMessageDialog(null, topTresRapida(), "Top 3", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+			break;
+		}
+		} while (!opcion.equals("Siguiente"));
 		
-		JOptionPane.showMessageDialog(null, ganadorRapida(), "Ganador", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+		JOptionPane.showMessageDialog(null, "Pasamos a la siguiente fase! Una carrera de tres vueltas!!", "Carrera", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
+	
+		// CARRERA
+		correrCarrera();
 		
-		JOptionPane.showMessageDialog(null, topTresRapida(), "Top 3", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
-	}
+	}	
 	
 	public static void mostrarPilotos() {
 		String eleccion;
@@ -241,12 +260,11 @@ public class Piloto {
 
 	}
 
+	
 	public static void correrCarrera() {
 		int check=0;
 		String puntaje = "";
-		
-		autosClasificadosRapida();
-		
+				
 		//inicio
 		JOptionPane.showMessageDialog(null, "Preparense, la carrera esta por comenzar!", "Que empiece la carrera!", JOptionPane.DEFAULT_OPTION,new ImageIcon(Main.class.getResource("/img/f1.png")));
 		do {

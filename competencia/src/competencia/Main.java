@@ -8,7 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		//menus y variables
-		String [] menu1 = {"Ver escuderias", "Ver pilotos", "Vuelta rápida", "Carrera", "Salir"};
+		String [] menu1 = {"Ver escuderias", "Ver pilotos", "Carrera", "Salir"};
 		int eleccion1 = 0;
 		
 		//inicio
@@ -29,19 +29,15 @@ public class Main {
 				break;
 				
 			case 2: 
-				Piloto.correrVueltaRapida();
+				Piloto.correr();
 				break;
 				
 			case 3: 
-				Piloto.correrCarrera();
-				break;
-				
-			case 4: 
 				JOptionPane.showMessageDialog(null, "Gracias, hasta la próxima carrera!", "Adiós!", JOptionPane.DEFAULT_OPTION, new ImageIcon(Main.class.getResource("/img/f1.png")));
 				break;
 			}
 			
-		} while (eleccion1!=4);
+		} while (eleccion1!=3);
 		
 	}
 
