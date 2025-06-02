@@ -83,7 +83,7 @@ public class Piloto {
 
 	@Override
 	public String toString() {
-		return "PILOTO: " + nombre + " | " + escuderia + " | " + auto + " | TIEMPO: " + tiempoVuelta;
+		return "PILOTO: " + nombre + " | " + escuderia + " | " + auto + " | TIEMPO: " +String.format("%.4f", tiempoVuelta)   + "\n";
 	}
 	
 	//metodos
